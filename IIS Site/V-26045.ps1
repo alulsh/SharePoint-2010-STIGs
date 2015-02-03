@@ -4,7 +4,7 @@ Title: The web-site must not allow double encoded URL requests.
 Reference: http://www.stigviewer.com/stig/iis_7.0_web_site/2014-03-25/finding/V-26045
 #>
 
-function applyDoubleEscapingURLs {
+function Set-DoubleEscapingURLs {
 
     $serverConfig = "/system.webServer/security/requestFiltering"
 

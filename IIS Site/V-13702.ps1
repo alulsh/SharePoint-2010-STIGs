@@ -4,7 +4,7 @@ Title: The Content Location header must not contain proprietary IP addresses.
 Reference: http://www.stigviewer.com/stig/iis_7.0_web_site/2014-03-25/finding/V-13702
 #>
 
-function setAlternateHostName {
+function Set-AlternateHostName {
 
     $fqdn = "$env:computername.$env:userdnsdomain"
 

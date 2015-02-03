@@ -4,7 +4,7 @@ Title: The web-site must not allow non-ASCII characters in URLs.
 Reference: http://www.stigviewer.com/stig/iis_7.0_web_site/2014-03-25/finding/V-26044
 #>
 
-function applyHighBitCharacters {
+function Set-HighBitCharacters {
 
     $serverConfig = "/system.webServer/security/requestFiltering"
 
