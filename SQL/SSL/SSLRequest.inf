@@ -1,0 +1,17 @@
+;----------------- request.inf -----------------
+[Version]
+
+Signature= $Windows NT$
+
+[NewRequest]
+
+Subject = "CN=hostname"
+KeySpec = 1
+KeyLength = 2048
+Exportable = TRUE
+MachineKeySet = TRUE
+ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
+ProviderType = 12
+RequestType = PKCS10
+KeyUsage = 0xA0
+SMIME = FALSE
