@@ -9,16 +9,16 @@ Reference: http://www.stigviewer.com/stig/iis_7.0_web_server/2013-04-11/finding/
 function Remove-SampleCode {
     
     $iisRootFolder = "C:\inetpub"
-    $adminScriptsFolder = $iisRootFolder+"\AdminScripts"
-    $0409Folder = $adminScriptsFolder+"\0409\"
-    $sampleFolder = $iisRootFolder+"\scripts\IISSamples"
+    $adminScriptsFolder = Join-Path -Path $iisRootFolder -ChildPath "AdminScripts"
+    $0409Folder = Join-Path -Path $adminScriptsFolder -ChildPath "0409"
+    $sampleFolder = Join-Path -Path $iisRootFolder -ChildPath "scripts\IISSamples"
     $msadcFolder = "C:\Program Files\Common Files\system\msadc"
 
     Set-Location $iisRootFolder
 
-    if (Test-Path "AdminScripts") {
+    if (Test-Path $adminScriptsFolder) {
 
-        Write-Host AdminScripts subfolder found in $iisRootFolder - deleting files and subfolders
+        Write-Output Not STIG compliant - AdminScripts subfolder found in $iisRootFolder - deleting files and subfolders
 
         takeown /f AdminScripts /r /d y
 
@@ -26,20 +26,28 @@ function Remove-SampleCode {
 
             takeown /f $0409Folder /r /d y
             CMD /c "icacls $0409Folder /grant BUILTIN\Administrators:(OI)(CI)F"
-            Remove-Item $0409Folder+"\*" -Recurse
+            
+            Push-Location $0409Folder
+            Get-ChildItem * -Recurse | Remove-Item
+            Pop-Location
+
+            Write-Output $0409Folder deleted
 
         }
 
-        Remove-Item $adminScriptsFolder+"\*" -Recurse
-        Remove-Item $adminScriptsFolder
+        Push-Location $adminScriptsFolder
+        Get-ChildItem * -Recurse | Remove-Item
+        Pop-Location
 
-        Write-Host $0409Folder and $adminScriptsFolder deleted
+        Remove-Item $adminScriptsFolder -Recurse
+
+        Write-Output $adminScriptsFolder deleted
 
     }
 
     else {
 
-        Write-Host $adminScriptsFolder does not exist - nothing to delete
+        Write-Output $adminScriptsFolder does not exist - nothing to delete
 
     }
 
@@ -47,28 +55,39 @@ function Remove-SampleCode {
 
         Write-Host $sampleFolder found - deleting 
 
+        Push-Location $sampleFolder
+        Get-ChildItem * -Recurse | Remove-Item
+        Pop-Location
+
+        Remove-Item $sampleFolder -Recurse
+
+        Write-Output $sampleFolder deleted
+
     }
 
     else {
 
-        Write-Host $sampleFolder does not exist
+        Write-Output $sampleFolder does not exist
 
     }
 
     if (Test-Path $msadcFolder) {
 
-        Write-Host $msadcFolder exists - deleting
+        Write-Output $msadcFolder exists - deleting
 
         Set-Location "C:\Program Files\Common Files\System\"
+        
         takeown /f msadc /r /d y
         icacls msadc /grant Administrators:f /t /q
         Remove-Item $msadcFolder -Recurse
+
+        Write-Output Deleted $msadcFolder
 
     }
 
     else {
 
-        Write-Host $msadcFolder does not exist
+        Write-Output $msadcFolder does not exist
 
     }
 
