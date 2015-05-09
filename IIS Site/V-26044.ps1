@@ -12,7 +12,7 @@ function Set-HighBitCharacters {
 
     if($requestFiltering.allowHighBitCharacters -eq $true){
 
-        Write-Host Server configuration is not STIG compliant - setting allow high bit characters to false
+        Write-Output "Server configuration is not STIG compliant - setting allow high bit characters to false"
 
         $requestFiltering.allowHighBitCharacters = $false
         $requestFiltering | Set-WebConfiguration -Filter $serverConfig -PSPath IIS:\
@@ -21,7 +21,7 @@ function Set-HighBitCharacters {
 
     else{
 
-        Write-Host Server configuration is STIG Compliant - allow high bit characters already set to false
+        Write-Output "Server configuration is STIG Compliant - allow high bit characters already set to false"
 
     }
 
@@ -35,7 +35,7 @@ function Set-HighBitCharacters {
 
         if ($requestFiltering.allowHighBitCharacters -eq $true){
 
-            Write-Host $siteName is not STIG compliant - setting allow high bit characters to false
+            Write-Output "$siteName is not STIG compliant - setting allow high bit characters to false"
 
             Set-WebConfigurationProperty -Filter $serverConfig -Name allowHighBitCharacters -Value False -PSPath IIS:\sites\$siteName
 
@@ -43,7 +43,7 @@ function Set-HighBitCharacters {
 
         else {
 
-            Write-Host $siteName is STIG compliant - allow high bit chracters is already set to false
+            Write-Output "$siteName is STIG compliant - allow high bit chracters is already set to false"
 
         }
 

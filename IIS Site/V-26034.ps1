@@ -21,4 +21,6 @@ function Set-GlobalTrustLevel {
 
     }
 
+    Write-Output ".Net Global Trust level set to Medium at the server level"
+
 }

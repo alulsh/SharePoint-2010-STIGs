@@ -10,15 +10,13 @@ http://blog.bugrapostaci.com/2011/10/27/how-to-remove-unnecessery-handler-mappin
 
 function Set-HandlerMappings {
 
-    Import-Module WebAdministration
-
     $handlerMappings = Import-CSV 'BlackList.csv'
 
     foreach ($handlerMapping in $handlerMappings) {
 
         Remove-WebHandler -Name $handlerMapping.Name
 
-        Write-Host Removing $handlerMapping.Name
+        Write-Output "Removing $($handlerMapping.Name)"
 
     }
 

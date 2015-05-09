@@ -18,7 +18,7 @@ function Set-AlternateHostName {
 
         if(!$runtimeConfig.alternateHostName){
 
-            Write-Host $siteName - Not STIG compliant - alternateHostName is blank
+            Write-Output "$siteName - Not STIG compliant - alternateHostName is blank"
 
             Set-WebConfigurationProperty -Filter "/system.webServer/serverRuntime" -Name alternateHostName -Value $fqdn
 
@@ -26,7 +26,7 @@ function Set-AlternateHostName {
 
         else {
 
-            Write-Host $siteName - STIG compliant - alternateHostName is $runtimeConfig.alternateHostName
+            Write-Output "$siteName - STIG compliant - alternateHostName is $runtimeConfig.alternateHostName"
 
         }
 

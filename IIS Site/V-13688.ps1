@@ -8,4 +8,6 @@ function Set-LogDataFields {
 
     Set-WebConfigurationProperty -Filter "/system.applicationHost/sites/siteDefaults" -Name logfile.logExtFileFlags -Value "Date,Time,ClientIP,UserName,ServerIP,Method,UriStem,UriQuery,HttpStatus,Win32Status,TimeTaken,ServerPort,UserAgent,Referer,HttpSubStatus"
 
+    Write-Output "Configured IIS logs per STIG guidelines"
+
 }

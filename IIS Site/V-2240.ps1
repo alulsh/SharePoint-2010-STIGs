@@ -17,6 +17,8 @@ function Set-MaxConnections {
 
         Set-WebConfigurationProperty -Filter $serverConfiguration -Name Limits -Value @{MaxConnections=$maxConnections}
 
+        Write-Output "Max connections set to $maxConnections for $name"
+
     }
 
 }

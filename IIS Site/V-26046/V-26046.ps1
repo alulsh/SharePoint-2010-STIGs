@@ -11,7 +11,7 @@ function Disabled-UnlistedFileExtensions {
 
     if ($requestFiltering.allowUnlisted -eq "True") {
 
-        Write-Host Not STIG compliant - Unlisted file extensions are allowed
+        Write-Output "Not STIG compliant - Unlisted file extensions are allowed"
 
         $requestFiltering.allowUnlisted = $false
         $requestFiltering | Set-WebConfiguration -Filter $serverConfiguration -PSPath IIS:\
@@ -20,7 +20,7 @@ function Disabled-UnlistedFileExtensions {
 
     else {
 
-        Write-Host Server setting is STIG compliant - Checking IIS sites now
+        Write-Output "Server setting is STIG compliant - Checking IIS sites now"
 
     }
 
@@ -38,7 +38,7 @@ function Add-AllowedFileExtensions {
 
     foreach ($extension in $allowedExtensions) {
 
-        Write-Host Setting $extension.fileExtension to allowed in Request Filtering
+        Write-Output "Setting $($extension.fileExtension) to allowed in Request Filtering"
 
         Add-FileExtension $extension.fileExtension $extension.Allowed
 
