@@ -11,7 +11,9 @@ function Disable-AnonymousAccess {
 
     if ($anonymousAuthentication.Enabled -eq "True") {
 
-        Set-WebConfigurationProperty -Filter $serverConfiguration -Name Enabled -Value False
+        Write-Output "Disabling anonymous authentication at the IIS server level"
+
+        Set-WebConfigurationProperty -Filter $serverConfiguration -Value (@{enabled="False"})
     
     }
 
@@ -21,7 +23,9 @@ function Disable-AnonymousAccess {
 
         $siteName = $website.Name
         
-        Set-WebConfiguration -Filter $serverConfiguration -Name Enabled -Value False -PSPath IIS: -Location $siteName
+        Write-Output "Setting anonymous authentication enabled to false for $siteName"
+
+        Set-WebConfiguration -Filter $serverConfiguration -Value (@{enabled="False"}) -PSPath IIS:\ -Location $siteName
 
     }
 

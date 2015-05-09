@@ -8,22 +8,20 @@ function Set-GlobalAuthorizationRule {
 
     $serverConfiguration = "/system.webServer/security/authorization/add"
     $siteConfiguration = "/system.webServer/security/authorization/*"
-    
-    Import-Module WebAdministration
 
-    # Restrict server level access to Administrators only #
+    Write-Output "Restricting server level access to Administrators only"
 
     $authorizationRule = Get-WebConfiguration -Filter $serverConfiguration
     $authorizationRule.Users = "Administrators"
     $authorizationRule | Set-WebConfiguration -Filter $serverConfiguration -PSPath IIS:\
-
-    # Allow All Users to access existing IIS sites #
 
     $websites = Get-Website
 
     foreach ($website in $websites) {
 
         $siteName = $website.Name
+
+        Write-Output "$siteName authorization reset to All Users"
 
         Set-WebConfiguration -Filter $siteConfiguration -Value (@{AccessType="Allow"; Users="*"}) -PSPath IIS: -Location $siteName
 
