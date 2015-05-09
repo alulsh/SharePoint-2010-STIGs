@@ -10,15 +10,15 @@ function Enable-NetworkLevelAuthentication {
 
     if ($terminalServerSettings.UserAuthenticationRequired -eq 0) {
 
-        Write-Host Not STIG compliant - Network Level Authentication not enabled
+        Write-Output "Not STIG compliant - Network Level Authentication not enabled"
         $terminalServerSettings.SetUserAuthenticationRequired(1)
-        Write-Host Network level authentication enabled 
+        Write-Output "Network level authentication enabled" 
 
     }
 
     else {
 
-        Write-Host STIG Compliant - Network Level Authentication already enabled for Remote Desktop
+        Write-Output "STIG Compliant - Network Level Authentication already enabled for Remote Desktop"
 
     }
 
