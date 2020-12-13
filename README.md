@@ -1,3 +1,6 @@
+# Archived
+April 13, 2021 was the final date for SharePoint 2010 extended support. Please see the [SharePoint 2013 STIG scripts](https://github.com/alulsh/SharePoint-2013-STIGs).
+
 # SharePoint 2010 STIG Scripts
 PowerShell scripts to automatically apply the SharePoint 2010, IIS 7 Server, and IIS 7 Site Defense Information Systems Agency (DISA) Security Technical Implementation Guides (STIGs) to SharePoint 2010 farms.
 
